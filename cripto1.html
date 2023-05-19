@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Encriptador/Desencriptador</title>
+    <link rel="stylesheet" type="text/css" href="cripto.css">
+  </head>
+  <body>
+    <h1>Encriptador/Desencriptador</h1>
+    <p>Ingrese un texto para encriptar o desencriptar:</p>
+    <textarea id="input-text" rows="4" cols="50"></textarea><br><br>
+    <input type="radio" id="encriptar" name="accion" value="encriptar">
+    <label for="encriptar">Encriptar</label>
+    <input type="radio" id="desencriptar" name="accion" value="desencriptar">
+    <label for="desencriptar">Desencriptar</label><br><br>
+    <button onclick="realizarAccion()">Realizar Acción</button><br><br>
+    <p>Resultado:</p>
+    <textarea id="output-text" rows="4" cols="50"></textarea><br><br>
+    <button onclick="copiar()">Copiar Resultado</button>
+    <script>
+      function realizarAccion() {
+        let input = document.getElementById("input-text").value;
+        let accion = document.querySelector('input[name="accion"]:checked').value;
+        let output = "";
+        if (accion === "encriptar") {
+          output = encriptar(input);
+        } else {
+          output = desencriptar(input);
+        }
+        document.getElementById("output-text").value = output;
+      }
+      function encriptar(texto) {
+        return texto.replace(/e/g, "enter")
+                    .replace(/i/g, "imes")
+                    .replace(/a/g, "ai")
+                    .replace(/o/g, "ober")
+                    .replace(/u/g, "ufat");
+      }
+      function desencriptar(texto) {
+        return texto.replace(/enter/g, "e")
+                    .replace(/imes/g, "i")
+                    .replace(/ai/g, "a")
+                    .replace(/ober/g, "o")
+                    .replace(/ufat/g, "u");
+      }
+      function copiar() {
+        let output = document.getElementById("output-text");
+        output.select();
+        document.execCommand("copy");
+      }
+    </script>
+  </body>
+</html>
